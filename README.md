@@ -1,4 +1,5 @@
 # NgTextflow
+A small angular component to dynamically create a set of fixed size text areas based on the input content text.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
 
