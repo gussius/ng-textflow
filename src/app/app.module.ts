@@ -1,16 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgTextflowModule } from './ng-textflow/ng-textflow.module';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgTextflowModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
