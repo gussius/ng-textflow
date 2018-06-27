@@ -29,7 +29,7 @@ private  nodeStyles = {
 };
 ```
 
-The following example shown the use of the component where style object and text content is passed in.
+The following example shows the use of the component where style object and text content is passed in.
 ```html
 <ng-textflow
 	[nodeStyles]="nodeStyles"
@@ -44,7 +44,7 @@ The following example shown the use of the component where style object and text
 | firstOnTop | optional | boolean | Defines order of nodes by changing z-index of each  node as they are generated.
 
 ## How it works
-A service is used to create the nodes. The service puts the text into a dummy node. The actual height of the dummy node in the DOM is compared with the height of the node. The node component estimates the amount to trim off, then fine tunes the number of words until the dummy node size matches the node size. An *overflow* Observable is pushed prompting the service to create the next node.
+A service is used to create the nodes. The service puts the text into a dummy node. The actual height of the dummy node in the DOM is compared with the height of the node. The node component estimates the amount to trim off, then fine tunes the number of words until the dummy node size matches the node size. An *overflow* Observable is pushed prompting the service to create the next node. The following animation is a slowed down debug version to show the process steps.
 
 <p align="center">
 <img src="https://www.dropbox.com/s/0u3946opqs9rjlc/NgTextflow-example.gif?raw=1" alt="gif example of process" align="center" width="350px"/>
