@@ -31,7 +31,7 @@ export class AppComponent {
     color: '#444',
     lineHeight: '1.1em',
     leftAlignLast: 'justified'
-  };
+  }; 
 
   
 
