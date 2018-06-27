@@ -1,18 +1,8 @@
-@font-face {
+/* @font-face {
     font-family: 'DroidSerif';
     src: url('/assets/fonts/DroidSerif-Regular-webfont.woff') format('woff');
     font-weight: 400;
     font-style: regular;
-}
-
-/* @font-face {
-	font-family: 'TitleRegular';
-	src: url('/assets/fonts/Molengo-Regular.eot');
-    src: url('/assets/fonts/Molengo-Regular.woff') format('woff'),
-    url('/assets/fonts/Molengo-Regular.ttf') format('truetype'),
-    url('/assets/fonts/Molengo-Regular.svg') format('svg');
-	font-weight: 200;
-	font-style: normal;
 } */
 
 /* html, body {
@@ -24,3 +14,4 @@
     word-spacing: 3px;
     background-color: rgb(50, 50, 50);
 } */
+

@@ -44,7 +44,6 @@ export class CreateFlowService {
     this.nodeList.push(nodeRef.instance);
     nodeRef.instance.index = this.firstOnTop ? 100-this.nodeList.length : this.nodeList.length;
     nodeRef.instance.text = content;
-    console.log(nodeRef.instance.index);
 
     // Get back an observable to the overflow text.
     return nodeRef.instance;

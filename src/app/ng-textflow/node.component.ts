@@ -4,7 +4,7 @@ import { Observable, Subject } from 'rxjs';
 @Component({
   selector: 'app-node',
   template: `
-    <div #textref [ngStyle]="nodeStyle" [style.visibility]="isVisible" class="content">
+    <div #textref [ngStyle]="nodeStyle" class="content">
       {{text}}
       <div #dummy class="dummy" >{{ dummyText }}</div>
     </div>
@@ -32,7 +32,7 @@ export class NodeComponent implements OnInit {
 
   private _index: number;  
   nodeStyle: any = {};
-  isVisible: boolean = true;
+  isVisible: boolean = false;
 
   // FLAGS
   private trimming: boolean = false;
@@ -52,11 +52,13 @@ export class NodeComponent implements OnInit {
 
     // Wait 100ms for DOM to stabilise before testing elements.
     this.trimming = true;
-    if (this.index >= -1) {
-      setTimeout(() => this.manageState(), 200);
-    } else {
-      setTimeout(() => this.manageState());
-    }
+    setTimeout(() => { // Wait till index is resolved.
+      if (this.index >= 99) {
+        setTimeout(() => this.manageState(), 200);
+      } else {
+        this.manageState()
+      }
+    })
   }
 
   get dummyText(): string {
@@ -78,13 +80,38 @@ export class NodeComponent implements OnInit {
     setTimeout(() => {
       this._index = Math.abs(index);
       this.renderer.setStyle(this.textDivRef.nativeElement, 'z-index', index); 
-
-      console.log('z-index of content div: ', this.textDivRef.nativeElement.style.zIndex);
     });
   }
 
+  
+  applyStyle(style: any) {
+    this.nodeStyle = style;
+    this.nodeStyle.visibility = 'hidden';
+    this.nodeStyle.overflow = 'hidden';
+  }
+
+  parseLineHeight(): number {
+    let fontSize: string = this.textDivRef.nativeElement.style.fontSize;
+    let fontSizeValue: number = parseInt(fontSize.slice(0, -2));
+    let lineHeight: string = this.textDivRef.nativeElement.style.lineHeight;
+    let suffix: string = lineHeight.slice(-2);
+    let lineHeightValue: number = parseInt(lineHeight.slice(0, -2));
+    
+    switch(suffix) { 
+      case "px":
+        return lineHeightValue; 
+        break; 
+      case "em":
+        return fontSizeValue; 
+        break; 
+      default:
+        return lineHeightValue; 
+        break;
+    }
+  }
+  
   private compareDivs(): { 'lines': number, 'diffLines': number, 'words': number } {
-    let lineHeight = parseInt(this.textDivRef.nativeElement.style.lineHeight.slice(0, -2));
+    let lineHeight = this.parseLineHeight();
     let dummyLines = Math.floor(this.dummyDivRef.nativeElement.clientHeight / lineHeight);
     let contentLines = Math.floor(this.textDivRef.nativeElement.clientHeight / lineHeight);
     let dummyTextWordCount = this.dummyText.split(' ').length;
@@ -92,11 +119,8 @@ export class NodeComponent implements OnInit {
     return {
       'lines': dummyLines,
       'diffLines': dummyLines - contentLines,
-      'words': dummyTextWordCount};
-  }
-
-  applyStyle(style: any) {
-    this.nodeStyle = style;
+      'words': dummyTextWordCount
+    };
   }
 
   // ------------------ Trim loop test. ------------------
@@ -109,14 +133,17 @@ export class NodeComponent implements OnInit {
       this.trimming = false;
       this.adding = false;
       this.finishing = false;
-      console.log('stopping loop to prevent infinite looping!');
+      console.log('ERROR - loop count > 100');
     }
 
     if (this.trimming) {
+      // setTimeout(() => this.trim(), 1000);
       this.trim();
     } else if (this.adding) {
+      // setTimeout(() => this.addword(), 1000);
       this.addword();
     } else if (this.finishing) {
+      // setTimeout(() => this.finish(), 1000);
       this.finish();
     }
   }
@@ -124,11 +151,13 @@ export class NodeComponent implements OnInit {
   private trim() {
     // console.log('trimming words.');
     let comps = this.compareDivs();
-    let wordsToRemove = Math.floor(comps.words/comps.lines) * comps.diffLines;
+    // console.log('trimming:', comps);
+    let wordsToRemove = Math.floor(comps.words/comps.lines) * (comps.diffLines + 1);
     if (wordsToRemove > 0) {
       // console.log(`removing ${wordsToRemove} words.`); 
       this.dummyText = this.dummyText.split(' ').slice(0, comps.words - wordsToRemove).join(' ');
     } else {
+      // console.log('finished trimming');
       this.trimming = false;
       this.adding = true;
       this.addword();
@@ -138,14 +167,16 @@ export class NodeComponent implements OnInit {
   private addword() {
     // console.log('appending text.');
     let comps = this.compareDivs();
+    // console.log('appending:', comps);
 
-    if (comps.diffLines <= 0) {
+    if (comps.diffLines <= -1) {
       if (this.dummyText.length < this.text.length) {
         this.dummyText = this.dummyText + ' ' + this.text.split(' ')[comps.words];
       } else {
         // This is the last node.
         this.renderer.setStyle(this.textDivRef.nativeElement, 'textAlignLast', 'left');
         this.nodeStyle.visibility = 'visible';
+
       }
     } else {
       // Take off the last word again.
