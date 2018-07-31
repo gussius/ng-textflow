@@ -28,6 +28,6 @@ export class NgTextflowComponent implements OnInit {
   } 
   
   ngOnInit() {
-    setTimeout(() => this.nodeService.createFlow(this.content, this.viewContainer, this.nodeStyles));
+    this.nodeService.createFlow(this.content, this.viewContainer, this.nodeStyles);
   }
 }

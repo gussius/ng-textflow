@@ -94,19 +94,19 @@ export class NodeComponent implements OnInit {
     let fontSize: string = this.textDivRef.nativeElement.style.fontSize;
     let fontSizeValue: number = parseInt(fontSize.slice(0, -2));
     let lineHeight: string = this.textDivRef.nativeElement.style.lineHeight;
-    let suffix: string = lineHeight.slice(-2);
+    let suffix: string = lineHeight.slice(-2) || "px";
     let lineHeightValue: number = parseInt(lineHeight.slice(0, -2));
     
     switch(suffix) { 
-      case "px":
+      case "px": {
         return lineHeightValue; 
-        break; 
-      case "em":
+      }
+      case "em": {
         return fontSizeValue; 
-        break; 
-      default:
+      }
+      default: {
         return lineHeightValue; 
-        break;
+      }
     }
   }
   

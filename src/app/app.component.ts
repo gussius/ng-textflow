@@ -18,11 +18,14 @@ export class AppComponent {
     // We must have a fixed size container to create a string of nodes.
     height: '9em',
     width: '200px',
-    // Uncomment these to overlay all nodes on top of each other.
+
+    // // --- Uncomment these to overlay all nodes on top of each other.
     // position: 'absolute',
     // left: '10px',
     // top: '0px',
-    // backgroundColor: 'rgba(200, 200, 200, 0.4)',
+    // backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    // // ---
+
     margin: '25px',
     fontFamily: '"Vollkorn", "serif"',
     fontSize: '11px',
