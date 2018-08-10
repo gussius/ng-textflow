@@ -9,14 +9,14 @@ import { debounce } from '../../../node_modules/rxjs/operators';
       <div *ngIf="showPageNumbers && _pageNumberAtTop" [ngStyle]="numberStyle">
         {{pageNumber}}
       </div>  
-      <div *ngIf="hasHeading" [ngStyle]="headingStyle">
+      <div *ngIf="showHeading" [ngStyle]="headingStyle">
         {{heading}}
       </div>
       <div #textref [ngStyle]="nodeStyle" class="content">
         {{text}}
         <div #dummy class="dummy" >{{ dummyText }}</div>
       </div>
-      <div *ngIf="showPageNumbers && !_pageNumberAtTop" [ngStyle]="numberStyle">
+      <div *ngIf="showPageNumber && !_pageNumberAtTop" [ngStyle]="numberStyle">
         {{pageNumber}}
       </div>
     </div>
@@ -57,9 +57,9 @@ export class NodeComponent implements OnInit {
   private changes: MutationObserver;
   private padding: number;
   
-  hasHeading: boolean = true;
+  showHeading: boolean = true;
   text: string;
-  showPageNumbers: boolean;
+  showPageNumber: boolean;
   isOverlaid: boolean;
   pageNumber: number;
 
@@ -166,7 +166,7 @@ export class NodeComponent implements OnInit {
   }
 
   // Helper function to get em values into px values for simpler calculation later.
-  convertStyleToPx(style: any): any {
+  private convertStyleToPx(style: any): any {
     let tempStyle = style;
     // Get the fontSize of the style.
     let fontSizeSuffix: string = tempStyle['fontSize'].replace(/[\d\.]/g, '');

@@ -10,9 +10,9 @@ export class CreateFlowService implements OnDestroy {
   firstOnTop: boolean = true;
 
   // Subscriptions
-  finishedSubscription: Subscription; // For when the nodes are complete.
-  headingChangedSubscription: Subscription; // For when the heading is externally changed.
-  overFlowSubscriptions: Subscription[] = []; // During generation of nodes, fires when there are more nodes to generate.
+  private finishedSubscription: Subscription; // For when the nodes are complete.
+  private headingChangedSubscription: Subscription; // For when the heading is externally changed.
+  private overFlowSubscriptions: Subscription[] = []; // During generation of nodes, fires when there are more nodes to generate.
 
   // Provide an array of nodes once the generation is complete.
   private nodesSubject: Subject<NodeComponent[]> = new BehaviorSubject<NodeComponent[]>(null);
@@ -36,7 +36,7 @@ export class CreateFlowService implements OnDestroy {
 
         // Loop again to update the visibility of the headings.
         this.nodeList.forEach(node => {
-          node.hasHeading = count === this.nodeList.length ? false : true;
+          node.showHeading = count === this.nodeList.length ? false : true;
         });
       });
 
@@ -79,7 +79,7 @@ export class CreateFlowService implements OnDestroy {
     
     // Update the node
     nodeRef.instance.isOverlaid = isOverlaid;
-    nodeRef.instance.showPageNumbers = showPageNumbers;
+    nodeRef.instance.showPageNumber = showPageNumbers;
     nodeRef.instance.text = content;
     if (style) {
       nodeRef.instance.applyStyle(style);
