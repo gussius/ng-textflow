@@ -26,7 +26,6 @@ export class NgTextflowComponent implements OnInit {
     nodeService.firstOnTop = this.firstOnTop;
   } 
 
-
   hello(name: string): Number {
     return 2;
   }
