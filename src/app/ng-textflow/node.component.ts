@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, Renderer2, OnDestroy, HostBinding } from '@angular/core';
 import { Observable, Subject, interval } from 'rxjs';
-import { debounce } from '../../../node_modules/rxjs/operators';
+import { debounce } from 'rxjs/operators';
 
 @Component({
   selector: 'app-node',
@@ -124,7 +124,7 @@ export class NodeComponent implements OnInit {
     this.pageNumber = 100 - index;
     setTimeout(() => {
       this._index = Math.abs(index);
-      this.renderer.setStyle(this.textDivRef.nativeElement, 'z-index', index); 
+      this.renderer.setStyle(this.elementRef.nativeElement, 'z-index', index); 
     });
   }
 

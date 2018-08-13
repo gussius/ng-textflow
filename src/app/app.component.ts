@@ -11,7 +11,8 @@ import { Subscription } from 'rxjs';
         [nodeStyles]="nodeStyles"
         [content]="content"
         [firstOnTop]="true"
-        [showPageNumbers]="true">
+        [showPageNumbers]="true"
+        [isOverlaid]="true">
       </ng-textflow>
     </div>
   `,
@@ -36,17 +37,20 @@ export class AppComponent implements OnInit, OnDestroy {
       'textAlign': 'justify',
       'color': '#444',
       'lineHeight': '1.1em',
-      'leftAlignLast': 'justified'
+      'leftAlignLast': 'justified',
+      'background-color': 'white'
     },
     headingStyle: {
       'fontFamily': '"Vollkorn", "serif"',
       'padding-bottom': '2px',
       'font-size': '14px',
-      'height': '25px'
+      'height': '25px',
+      'background-color': 'white'
     },
     numberStyle: {
       'font-size': '10px',
       'fontFamily': '"Vollkorn", "serif"',
+      'background-color': 'white'
     }
   }; 
   
