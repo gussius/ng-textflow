@@ -10,7 +10,6 @@ import { CreateFlowService } from './create-flow.service';
 
 @NgModule({
   imports: [CommonModule],
-  providers: [CreateFlowService],
   declarations: [NgTextflowComponent, NodeComponent],
   entryComponents: [NodeComponent],
   exports: [NgTextflowComponent]
