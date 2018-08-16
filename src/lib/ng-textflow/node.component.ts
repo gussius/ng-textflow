@@ -2,11 +2,12 @@ import { Component, OnInit, ElementRef, ViewChild, Renderer2, OnDestroy, HostBin
 import { Observable, Subject, interval } from 'rxjs';
 import { debounce } from '../../../node_modules/rxjs/operators';
 
+// @dynamic
 @Component({
   selector: 'app-node',
   template: `
     <div class="mask" #maskTag>
-      <div *ngIf="showPageNumbers && _pageNumberAtTop" [ngStyle]="numberStyle">
+      <div *ngIf="showPageNumber && pageNumberAtTop" [ngStyle]="numberStyle">
         {{pageNumber}}
       </div>  
       <div *ngIf="showHeading" [ngStyle]="headingStyle">
@@ -16,7 +17,7 @@ import { debounce } from '../../../node_modules/rxjs/operators';
         {{text}}
         <div #dummy class="dummy" >{{ dummyText }}</div>
       </div>
-      <div *ngIf="showPageNumber && !_pageNumberAtTop" [ngStyle]="numberStyle">
+      <div *ngIf="showPageNumber && !pageNumberAtTop" [ngStyle]="numberStyle">
         {{pageNumber}}
       </div>
     </div>
@@ -47,7 +48,7 @@ import { debounce } from '../../../node_modules/rxjs/operators';
 })
 export class NodeComponent implements OnInit {
   @ViewChild('textref') private textDivRef: ElementRef;
-  @ViewChild('dummy') private dummyDivRef: ElementRef;
+  @ViewChild('dummy')  private dummyDivRef: ElementRef;
   @ViewChild('maskTag') private mask: ElementRef;
 
   private _index: number;  
@@ -64,13 +65,13 @@ export class NodeComponent implements OnInit {
   pageNumber: number;
 
   // Get host properties to dynamically change.
-  @HostBinding('style.position') private hostPosition = '';
-  @HostBinding('style.visibility') private hostVisibility = 'hidden';
+  @HostBinding('style.position') hostPosition = '';
+  @HostBinding('style.visibility') hostVisibility = 'hidden';
 
   // Dynamic styles.
-  private numberStyle: any = {};
-  private headingStyle: any = {};
-  private nodeStyle: any = {};
+  numberStyle: any = {};
+  headingStyle: any = {};
+  nodeStyle: any = {};
 
   // More text to put into nodes, so overflow.
   private overflowSubject: Subject<string> = new Subject();
@@ -110,8 +111,8 @@ export class NodeComponent implements OnInit {
   }
 
   // Some getter/setter methods.
-  private get dummyText(): string { return this.dummyDivRef.nativeElement.textContent; }
-  private set dummyText(content: string) { this.dummyDivRef.nativeElement.textContent = content; }
+  get dummyText(): string { return this.dummyDivRef.nativeElement.textContent; }
+  set dummyText(content: string) { this.dummyDivRef.nativeElement.textContent = content; }
   
   get isVisible(): boolean { return this._isVisible; }
   set isVisible(value: boolean) {

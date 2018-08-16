@@ -1,0 +1,1 @@
+export * from './ng-textflow/ng-textflow.module';

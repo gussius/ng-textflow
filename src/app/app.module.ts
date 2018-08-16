@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgTextflowModule } from './ng-textflow/ng-textflow.module';
+import { NgTextflowModule } from 'src/lib/public_api';
 
 import { AppComponent } from './app.component';
 

@@ -5,15 +5,16 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-lib": "ng-packagr -p ng-package.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
-  "dependencies": {
+  "peerDependencies": {
     "@angular/animations": "^6.0.0",
-    "@angular/common": "^6.0.0",
     "@angular/compiler": "^6.0.0",
+    "@angular/common": "^6.0.0",
     "@angular/core": "^6.0.0",
     "@angular/forms": "^6.0.0",
     "@angular/http": "^6.0.0",
@@ -23,7 +24,7 @@
     "core-js": "^2.5.4",
     "hoek": "^5.0.3",
     "rxjs": "^6.0.0",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26" 
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.0",
@@ -41,6 +42,7 @@
     "karma-coverage-istanbul-reporter": "~1.4.2",
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "^4.1.0",
     "protractor": "^5.4.0",
     "rxjs-compat": "^6.2.2",
     "ts-node": "~5.0.1",
