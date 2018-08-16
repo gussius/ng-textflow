@@ -17,12 +17,12 @@ import { CreateFlowService } from './create-flow.service';
 })
 export class NgTextflowModule {
 
-  // public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders {
 
-  //   return {
-  //     ngModule: NgTextflowModule,
-  //     providers: [ CreateFlowService ]
-  //   }
-  // }
+    return {
+      ngModule: NgTextflowModule,
+      providers: [ CreateFlowService ]
+    }
+  }
 
  }

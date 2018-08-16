@@ -1,4 +1,6 @@
 {
+  "name": "ng-textflow",
+  "version": "0.2.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,8 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
-  "dependencies": {
+  "private": false,
+  "peerDependencies": {
     "@angular/animations": "^6.0.0",
     "@angular/compiler": "^6.0.0",
     "@angular/common": "^6.0.0",
