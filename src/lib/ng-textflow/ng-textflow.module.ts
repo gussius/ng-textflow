@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 // Module components
 import { NgTextflowComponent } from './ng-textflow.component';
-import { NodeComponent } from '../ng-textflow/node.component';
+import { NodeComponent } from './node.component';
 
 // Services
 import { CreateFlowService } from './create-flow.service';
