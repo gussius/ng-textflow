@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CreateFlowService } from './ng-textflow/create-flow.service';
-import { NodeComponent } from './ng-textflow/node.component';
+import { CreateFlowService } from 'src/lib/ng-textflow/create-flow.service';
+import { NodeComponent } from 'src/lib/ng-textflow/node.component';
 import { Subscription } from 'rxjs';
 
 @Component({
