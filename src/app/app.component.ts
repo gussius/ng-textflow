@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
         [content]="content"
         [firstOnTop]="true"
         [showPageNumbers]="true"
-        [isOverlaid]="true">
+        [isOverlaid]="false">
       </ng-textflow>
     </div>
   `,
