@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   template: `
-    <div class="shift">
+    <div class="shift" (click)="onClick()">
       <ng-textflow
         [nodeStyles]="nodeStyles"
         [content]="content"
@@ -61,18 +61,13 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.nodesSubscription = this.flowService.nodes.subscribe((nodes: NodeComponent[]) => {
       if (nodes) {
-        nodes.forEach(node => {
-          node.pageNumberAtTop = false;
-        });
-        nodes[0].heading = 'Chapter One';
-        setTimeout(() => { 
-          nodes[0].heading = '';
-          setTimeout(() => {
-            nodes[0].heading = 'Once Upon A Time';
-          }, 1000);
-      }, 1000);
+        nodes[0].heading = 'Once Upon A Time';
       }
     });
+  }
+
+  onClick() {
+    this.content = "Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah"
   }
 
   ngOnDestroy() {

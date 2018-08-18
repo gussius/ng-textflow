@@ -18,7 +18,6 @@ export class CreateFlowService implements OnDestroy {
   private nodesSubject: Subject<NodeComponent[]> = new BehaviorSubject<NodeComponent[]>(null);
   nodes: Observable<NodeComponent[]> = this.nodesSubject as Observable<NodeComponent[]>;
 
-
   constructor(private injector: Injector, private resolver: ComponentFactoryResolver) {
     this.nodeFactory = this.resolver.resolveComponentFactory(NodeComponent);
     
@@ -42,9 +41,12 @@ export class CreateFlowService implements OnDestroy {
 
       // Make list of nodes available once all are complete.
       this.nodesSubject.next(this.nodeList);
-      this.nodesSubject.complete();
     });
   } 
+
+  clearNodes() {
+    this.nodeList = [];
+  }
 
   // This will kick off a process that generates a node every time a generated node is too full and overflows with text.
   createFlow(textPassage: string, 

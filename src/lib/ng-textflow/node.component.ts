@@ -87,7 +87,7 @@ export class NodeComponent implements OnInit {
 
   // Inject services.
   constructor(private renderer: Renderer2, private elementRef: ElementRef) { };
-  
+
   ngOnInit() {    
     // Some initialisation.
     this.dummyText = this.text;
