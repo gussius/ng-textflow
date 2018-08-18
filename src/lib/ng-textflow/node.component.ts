@@ -6,7 +6,7 @@ import { debounce } from 'rxjs/operators';
 @Component({
   selector: 'app-node',
   template: `
-    <div class="mask" #maskTag>
+    <div class="mask" #maskTag [ngStyle]="hostStyle">
       <div *ngIf="showPageNumber && pageNumberAtTop" [ngStyle]="numberStyle">
         {{pageNumber}}
       </div>  
@@ -72,6 +72,28 @@ export class NodeComponent implements OnInit {
   numberStyle: any = {};
   headingStyle: any = {};
   nodeStyle: any = {};
+  hostStyle: any = {};
+
+  // Default style incase there is none supplied.
+  private defaultStyles = {
+    hostStyle: {},
+    contentStyle: {
+      'height': '9em',
+      'width': '200px',
+      'fontSize': '11px',
+      'wordSpacing': '2px',
+      'textAlign': 'justify',
+      'lineHeight': '1.1em',
+      'leftAlignLast': 'justified'
+    },
+    headingStyle: {
+      'font-size': '14px',
+      'height': '25px'
+    },
+    numberStyle: {
+      'font-size': '10px',
+    }
+  }; 
 
   // More text to put into nodes, so overflow.
   private overflowSubject: Subject<string> = new Subject();
@@ -147,8 +169,9 @@ export class NodeComponent implements OnInit {
 
   // Apply the style to the current node. Assumes the correct attributes are contained.
   applyStyle(style: any) {
-    this.nodeStyle = this.convertStyleToPx(style.contentStyle);
-    this.numberStyle = style.numberStyle;
+    this.nodeStyle = style.contentStyle ? this.convertStyleToPx(style.contentStyle) : this.convertStyleToPx(this.defaultStyles.contentStyle);
+    this.numberStyle = style.numberStyle ? style.numberStyle : this.defaultStyles.numberStyle;
+    this.hostStyle = style.hostStyle ? style.hostStyle : this.defaultStyles.hostStyle;
     // Let's manipulate the padding style that was added to manage top or bottom placed numbering.
     if (this.numberStyle.padding > '') {
       this.padding = parseInt(this.numberStyle.padding.replace(/\D/g, ''));
@@ -156,7 +179,7 @@ export class NodeComponent implements OnInit {
       this.padding = 16;
     }
     this.numberStyle['padding-left'] = `${parseInt(this.nodeStyle.width.replace(/\D/g, ''))/2}px`;
-    this.headingStyle = style.headingStyle;
+    this.headingStyle = style.headingStyle ? style.headingStyle : this.defaultStyles.headingStyle;
     this.headingStyle.width = this.nodeStyle.width;
     this.renderer.setStyle(this.elementRef.nativeElement, 'width', style.width);
     this.nodeStyle.overflow = 'hidden';

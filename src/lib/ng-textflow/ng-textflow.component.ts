@@ -34,5 +34,4 @@ export class NgTextflowComponent {
   constructor(private nodeService: CreateFlowService) {
     nodeService.firstOnTop = this.firstOnTop;
   } 
-
 }
